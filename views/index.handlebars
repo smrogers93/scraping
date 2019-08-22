@@ -36,22 +36,16 @@
 <br>
 
 <div class="container">
-    <div class="row">
+  <div class="row">
+    {{#each dbArticle}}
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Example Text</h5>
-                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit saepe necessitatibus laborum porro laboriosam temporibus nulla ut aliquid quod veritatis tempore earum hic aliquam tempora exercitationem esse eos, qui quos.</p>
+                    <h5 class="card-title">{{ this.title }}</h5>
+                        <p class="card-text">{{ this.link}}</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Example Text</h5>
-                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit saepe necessitatibus laborum porro laboriosam temporibus nulla ut aliquid quod veritatis tempore earum hic aliquam tempora exercitationem esse eos, qui quos.</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{/each}}
+  </div>
 </div>

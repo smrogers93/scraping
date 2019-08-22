@@ -1,18 +1,11 @@
 var express = require("express");
 var exphbs = require("express-handlebars")
-var mongojs = require("mongojs");
 var logger = require("morgan");
 var mongoose = require("mongoose");
 var axios = require("axios");
 var cheerio = require("cheerio");
 
-var databaseUrl = "scraper";
-var collections = ["scrapedData"];
-
-var db = mongojs(databaseUrl, collections);
-db.on("error", function(error) {
-    console.log("Database Error:", error);
-})
+var db = require("./models")
 
 var app = express();
 
@@ -30,14 +23,14 @@ app.get("/", function(req, res) {
 });
 
 app.get("/all", function(req, res) {
-    db.scrapedData.find({})
+    db.Article.find({})
     .then(function(dbArticle) {
-        res.json(dbArticle)
+        res.render("index", {dbArticle})
     })
     .catch(function(err) {
         res.json(err)
-    });
-});
+    })
+})
 
 app.get("/scrape", function(req, res) {
     axios.get("https://nytimes.com").then(function(response) {
@@ -48,7 +41,7 @@ app.get("/scrape", function(req, res) {
             var link = $(element).find("a").attr("href")
 
             if (title && link) {
-                db.scrapedData.save({
+                db.Article.create({
                     title: title,
                     link: link
                 },
