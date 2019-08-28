@@ -16,9 +16,7 @@ app.use(express.json());
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scraper";
-console.log(JSON.stringify(process.env))
-mongoose.connect(MONGODB_URI);
+var MONGODB_URI = process.env.MONGOLAB_GRAY_URI || "mongodb://localhost/scraper";
 
 app.get("/", function(req, res) {
     res.render("index");
