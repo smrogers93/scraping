@@ -56,7 +56,7 @@ app.get("/scrape", function(req, res) {
             }
         })
     })
-    console.log("success")
+    res.send(console.log("Scrape Complete"))
 })
 
 app.post("/articles:id", function(req, res) {
